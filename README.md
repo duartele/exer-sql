@@ -1,0 +1,2 @@
+# exer-sql
+Basic commands
