@@ -1,5 +1,4 @@
 # 1 - Create a query that count how many students have a scholarship
-
 # Create a database
 create database college
 default character set utf8
@@ -32,7 +31,7 @@ values
 ('Rodrigo', 'M', '1986-07-14', 'Portugal'),
 ('Saoirse', 'F', '1986-03-02', 'Ireland'),
 ('Saray', 'F', '1986-02-01', 'Spain'),
-('Maria', 'F', '1986-01-02', 'Mexico')
+('Maria', 'F', '1986-01-02', 'Mexico'),
 ('Yumi', 'F', '2000-01-02', 'Japan'); #as I don't put all columns, I need to specify them
 
 insert into scholarship values 
@@ -40,8 +39,8 @@ insert into scholarship values
 (default, '1',default),
 (default, '6',default);
 
-# Use select and count to get the desied output
-select count(s.id) from
+# Use select and count to get the desired output
+select count(s.id)  from
 students s left join scholarship b
 on s.id = b.id_user
 group by b.scholarship
@@ -59,9 +58,62 @@ students s left join scholarship b
 on s.id = b.id_user
 where b.id_user is not null; #I believe this 'bring' the column id_user to students and check who it not null 
 
-# 2 - Create a query that count how much students have payed this month
-#Primeira vez que modifico pelo Visual o código - agora sim estou evoluindo ^_^
+# 2 - Create a query that count how much students have payed this month - november
+#create payments table and put some values
+create table payments(
+id int auto_increment,
+id_user int not null,
+amount_paid int not null,
+payment_date date not null,
+primary key(id),
+foreign key(id_user) references students
+);
 
+insert into payments values
+(default,'5','160','2021-10-10'),
+(default,'5','160','2021-11-10'),
+(default,'6','20','2021-11-10'),
+(default,'6','170','2021-11-10'),
+(default,'2','122','2021-10-10')
+;
 
+#create a query to get the answe
+# I need to consolidate sum(amount_paid) for each student because some students could pay more than once (Maria, for instance)
+select id_user, amount_paid 
+from payments
+where payment_date >= '2021-11-01'
+group by id_user
+;
 
+#I put the last select in the inner join
+select count(s.id) 
+from students s join (select id_user, (amount_paid) from payments where payment_date >= '2021-11-01' group by id_user) as p
+on s.id = p.id_user
+;
 
+#2.1 - Obtain the name, date of the last payment and the amount paid this month of the students who paid
+select s.name, max(p.payment_date) as last_payment, sum(p.amount_paid) 
+from students s left join payments p
+on s.id = p.id_user
+where payment_date >= '2021-11-01'
+group by s.id
+;
+
+# 3 - Show 3 columns - the first with the students who paid this mounth,
+# the second with the students who received scholarship and the third with the students who need to pay
+# Desired Output:  2 3 3'
+
+# If we could create tables, this solution would solve the problem:
+
+create table temp2
+select s.* , p.amount_paid, c.scholarship
+from students s left join (select id_user, amount_paid from payments where payment_date >= '2021-11-01' group by id_user) as p on s.id = p.id_user
+				left join scholarship as c on s.id = c.id_user
+;
+
+# Next step: create these aux columns
+select sum(aux_p), sum(aux_s), sum(aux_d)
+from temp3
+;
+
+# As we couldn't, I need to find other solution

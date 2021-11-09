@@ -1,17 +1,17 @@
 # exer-sql
-Basic commands
 
+I did a test in a job interview and I am presenting the exercises in the exercs.sql file.
+The maximum time to submit the test was 1 hour 
 Contents of exercs.sql file:
 
 1) How to count how many students don't have a scholarship?
 
-I have created a database called 'college' and the tables 'students' and 'scholarship'.
-
 2) How much each student paid this month?
 
-* Next steps
+3) Show 3 columns - the first with the students who paid this mounth
+		  - the second with the students who received scholarship and
+		  - the third with the students who need to pay
+   Desired Output:  2 3 3'
+4) Create a function in Python (or R) to parse and transform string and return four results.
 
--Put one more tupla in the students table #done at the commit by Visual Studio Code
--Now I will create a 'payments' table which is the improvement of 'scholarship' table
 
--3) Show how many students have a scholarship and how many paid in two columns - Output: 3 4
