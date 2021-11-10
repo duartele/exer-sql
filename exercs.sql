@@ -99,21 +99,44 @@ where payment_date >= '2021-11-01'
 group by s.id
 ;
 
-# 3 - Show 3 columns - the first with the students who paid this mounth,
+# 3 - Show 3 columns - the first with the students who paid 160 or more this mounth,
 # the second with the students who received scholarship and the third with the students who need to pay
-# Desired Output:  2 3 3'
+# Desired Output:  1 3 3'
 
 # If we could create tables, this solution would solve the problem:
-
 create table temp2
 select s.* , p.amount_paid, c.scholarship
 from students s left join (select id_user, amount_paid from payments where payment_date >= '2021-11-01' group by id_user) as p on s.id = p.id_user
 				left join scholarship as c on s.id = c.id_user
 ;
 
-# Next step: create these aux columns
+create table temp3
+select *,
+case
+	when amount_paid >= 160 then 1
+    else 0
+end as aux_p
+from temp2;
+
+create table temp4
+select *,
+case
+	when scholarship = 'S' then 1
+    else 0
+end as aux_s
+from temp3;
+
+create table temp5
+select *,
+case
+	when aux_p = 1 or aux_s = 1 then 0
+    else 1
+end as aux_d
+from temp4;
+
 select sum(aux_p), sum(aux_s), sum(aux_d)
-from temp3
+from temp5
 ;
 
-# As we couldn't, I need to find other solution
+#Dropping the temporary tables
+drop table temp, temp2, temp3, temp4, temp5, temp6;
