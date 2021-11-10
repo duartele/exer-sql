@@ -8,10 +8,10 @@ Contents of exercs.sql file:
 
 2) How much each student paid this month?
 
-3) Show 3 columns - the first with the students who paid this mounth
+3) Show 3 columns - the first with the students who paid 160 or more this mounth
 		  - the second with the students who received scholarship and
 		  - the third with the students who need to pay
-   Desired Output:  2 3 3'
+   Desired Output:  1 3 3'
 4) Create a function in Python (or R) to parse and transform string and return four results.
 
 
