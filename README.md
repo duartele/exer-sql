@@ -14,4 +14,6 @@ Contents of exercs.sql file:
    Desired Output:  1 3 3'
 4) Create a function in Python (or R) to parse and transform string and return four results.
 
+#basic_cmds
 
+I want to put all cmds that I know here with some examples.
