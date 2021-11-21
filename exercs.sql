@@ -140,3 +140,64 @@ from temp5
 
 #Dropping the temporary tables
 drop table temp, temp2, temp3, temp4, temp5, temp6;
+
+#Now I am creating other table to show more cms
+create table if not exists courses(
+name varchar(30) not null unique,
+description text,
+workload int unsigned,
+tot_classes int unsigned,
+year year default '2021'
+);
+# 1) there isn't problem using key as name of columns (I used name and year);
+# Primary key is unique, but unique not necessarily a primary key;
+# Unsigned is used when you know that the values will only be positive;
+# if not exists is used when you don't want to overwrite a table.
+# I don't define a primary key because I want to show that you after need to do two steps do put a primary key
+
+desc courses; #When you don't put a primery key, the unique key is assumed to be primary key.
+
+# First, create a column that will be primary key using alter table
+alter table courses
+add column id_course int first;
+# If you don't use First, the column will be append at the end
+# If you want to put a column at the middle, you need to use the key after
+
+#Now I can define it as a primary key
+alter table courses
+add primary key (id_course); 
+
+desc courses; #Now the column name is considered unique, not primary key anymore
+
+#Now I am putting some instances in my table with some miss spelling
+insert into courses values
+('1','HTML4','HTML5 Course','40','37','2014'),
+('2','Algorithms','Programming logic','20','15','2014'),
+('3','Photoshop','Photoshop tips','10','8','2014'),
+('4','PGP','For beginners','40','20','2010'),
+('5','Jarva','Introduction to Java Language','10','29','2000'),
+('6','MySQL','Database MySQL','30','15','2016'),
+('7','Word','Complete course in Word','40','30','2016'),
+('8','Dance','rhythmic dances','40','30','2018'),
+('9','Cooking','Learn how to make Kibe','40','30','2018'),
+('10','Youtuber','Generate controversy and gain subscribers','5','2','2018');
+
+select * from courses;
+
+#It is possible to modify many instances (lines) at once, but it's dangerous (verify if safe update is active in preferences SQL Editor).
+#To avoid this, we can use the key Limit 1
+update courses
+set name = 'HTML5'
+where id_course = '1';
+
+update courses
+set name = 'PHP', year = '2015'
+where id_course = '4'
+limit 1;
+
+#Delete instances - you can use limit as well
+delete from courses
+where id_course = 8;
+
+#Delete all instances of a table - it's different of drop table because when using delete the table still exists.
+truncate courses;
