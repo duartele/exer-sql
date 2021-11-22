@@ -49,4 +49,17 @@ change column amount_paid qtd int unsigned; #change the name of a column - you n
 alter table payments
 rename to payment; #rename is when you want to change the name of the table
 
- 
+ update courses
+set name = 'HTML5', year = '2015'
+where id_course = '1'
+limit 1; #Use limit to safe update - just change 1 instance (many columns of that instance)
+
+#To delete instances:
+delete from courses
+where id_course = 8
+limit 3; #Here again you can specify the max limit of changes 
+
+#Delete all instances of a table - it's different of drop table because when using delete the table still exists.
+truncate courses;
+
+
