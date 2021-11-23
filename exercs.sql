@@ -201,3 +201,8 @@ where id_course = 8;
 
 #Delete all instances of a table - it's different of drop table because when using delete the table still exists.
 truncate courses;
+
+#To create a Backup - here is called Dump
+#Go to server - Data Export
+#Its good to export the structure and the Data
+#You can choose to use a folder os put everything in a file and Its good to Include the Create Schema
