@@ -5,6 +5,9 @@
 # Active a database
 use college;
 
+#Show tables from the active database
+show tables;
+
 # Create a database
 create database college
 default character set utf8
@@ -62,4 +65,7 @@ limit 3; #Here again you can specify the max limit of changes
 #Delete all instances of a table - it's different of drop table because when using delete the table still exists.
 truncate courses;
 
-
+#To create a Backup - here is called Dump
+#Go to server - Data Export
+#Its good to export the structure and the Data
+#You can choose to use a folder os put everything in a file and Its good to Include the Create Schema
