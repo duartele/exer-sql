@@ -69,3 +69,13 @@ truncate courses;
 #Go to server - Data Export
 #Its good to export the structure and the Data
 #You can choose to use a folder os put everything in a file and Its good to Include the Create Schema
+
+#More about Select cmd
+select name, workload, tot_classes  from courses # you can choose the order od the columns
+where year <= '2016' and tot_classes <> 20
+#where year != '2016' != or <> is different
+#where year in ('2014', '2015', '2016')
+#where tot_classes between '20' and '30'
+order by name asc; #you don't need to put asc 
+# order by name desc, year - desc = descending order - you can put more the one column here (is asc because it's after the keyword desc)
+
