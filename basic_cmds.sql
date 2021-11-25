@@ -79,3 +79,25 @@ where year <= '2016' and tot_classes <> 20
 order by name asc; #you don't need to put asc 
 # order by name desc, year - desc = descending order - you can put more the one column here (is asc because it's after the keyword desc)
 
+#Operator LIKE - wildcard %
+select name, tot_classes from courses
+where name like 'P%'; # % is 0 or many caracthers and search for 'p%' as well - YOU CAN USE 'NOT LIKE'
+#where name like '%P'; # it's different from 'p%'
+#where name like '%P%';
+#where name like 'Ph%P%'; #bring things like PHOTOSHOP or php5
+#where name not like '%P%';
+
+#Operator LIKE - wildcard _
+select name, tot_classes from courses
+where name like 'p_'; #This wildcard replace exactly one value.
+#where name like 'p_p%'; #Must have a letter. For example: 'PHP' OR 'PHP5'
+#where name like 'p__p%'; #Here I put 2 _
+
+select distinct name from courses; #distinct select just one of each, but it's not a grouping!!!
+
+#Aggregation functions - COUNT, MAX, MIN, SUM, AVG
+select count(tot_classes) from courses;
+select count(*) from courses
+where tot_classe > 40;
+
+select max(tot_classes) from courses
