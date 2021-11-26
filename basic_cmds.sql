@@ -100,4 +100,19 @@ select count(tot_classes) from courses;
 select count(*) from courses
 where tot_classe > 40;
 
-select max(tot_classes) from courses
+select max(tot_classes) from courses;
+
+#Group and Having
+select tot_classes, count(*) from courses
+where year = '2016'
+group by tot_classes; #you can use 'where' with group However, when you used a grouped column, you need to use 'HAVING'
+
+select tot_classes, count(*) from courses
+where year = '2016'
+group by tot_classes
+having count(*) > '5'; # tot_classes or count are grouped colums. So you need to use having
+
+#Using select inside a select
+select tot_classes, count(*) from courses
+group by tot_classes 
+having tot_classes > (select avg(tot_classes) from courses)
