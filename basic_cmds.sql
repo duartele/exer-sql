@@ -115,4 +115,14 @@ having count(*) > '5'; # tot_classes or count are grouped colums. So you need to
 #Using select inside a select
 select tot_classes, count(*) from courses
 group by tot_classes 
-having tot_classes > (select avg(tot_classes) from courses)
+having tot_classes > (select avg(tot_classes) from courses);
+
+#Foreign key - First create a column
+alter table payments
+add column id_user int; #nedd to have the same type of the original column
+
+#The sign as a foreign key
+alter table payments
+add foreign key (id_user)
+references students(id);
+#If you don't put students(id) won't show error, but the key will be just normal (not foreign key)
