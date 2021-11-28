@@ -13,6 +13,8 @@ born date,
 nationality varchar(30) default 'Brazil',
 primary key(id)
 )default charset = utf8; #I know I don't need to put this charset because it's already utf8
+#By default, the engine selected is MyISAM and it's not good - don't have ACID property.
+# So, it is better to use InnoDB or XtraDB
 
 create table scholarship(
 id int auto_increment,
@@ -66,8 +68,9 @@ id_user int not null,
 amount_paid int not null,
 payment_date date not null,
 primary key(id),
-foreign key(id_user) references students
-);
+foreign key(id_user) references students(id)
+); #If you don't put the name of the column (id in this example - students(id)). It won't show error, but id_user won't be a foreign key in this case - just a regular key
+#And can generate inconsistencies. For example, I don't have the id_student 5 and she(he) paid.
 
 insert into payments values
 (default,'5','160','2021-10-10'),
