@@ -17,3 +17,4 @@ Contents of exercs.sql file:
 #basic_cmds
 
 I want to put all cmds that I know here with some examples. It's finished, but when I discover more cmds, I'll bring here.
+I want to put more cases about case When
