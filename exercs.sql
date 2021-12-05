@@ -209,3 +209,5 @@ truncate courses;
 #Go to server - Data Export
 #Its good to export the structure and the Data
 #You can choose to use a folder os put everything in a file and Its good to Include the Create Schema
+
+#I need to create more case when exercises
