@@ -211,3 +211,20 @@ truncate courses;
 #You can choose to use a folder os put everything in a file and Its good to Include the Create Schema
 
 #I need to create more case when exercises
+#4) Give 20% off if the student paid by the limit date and give 10% fee if she/he paid after the limit date
+# I will find the payments of december. Who paid untill 12/12 will receive 20% off
+
+create table temp
+select id_user, max(payment_date) as payment_date, sum(amount_paid) as amount_paid
+from payments
+where month(payment_date) = 12
+group by id_user;
+
+select s.id,
+case when t.payment_date <= '2021-12-12' then 160*0.8
+else 160*1.2
+end as tuition 
+from students as s left join temp as t 
+on s.id = t.id_user
+group by s.id
+order by tuition;
