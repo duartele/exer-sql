@@ -42,7 +42,7 @@ alter table payments
 drop column tuition; #drop column
 
 alter table payments
-modify column amount_paid smallint; #modifying the type of a column - use change if you want to change the name of the column
+modify column amount_paid smallint; #modifying the type of a column - use "change" if you want to change the name of the column
 
 alter table payments
 change column amount_paid qtd int unsigned; #change the name of a column - you need to specify again the type and the constrains
@@ -52,7 +52,7 @@ change column amount_paid qtd int unsigned; #change the name of a column - you n
 alter table payments
 rename to payment; #rename is when you want to change the name of the table
 
- update courses
+update courses
 set name = 'HTML5', year = '2015'
 where id_course = '1'
 limit 1; #Use limit to safe update - just change 1 instance (many columns of that instance)
@@ -119,10 +119,18 @@ having tot_classes > (select avg(tot_classes) from courses);
 
 #Foreign key - First create a column
 alter table payments
-add column id_user int; #nedd to have the same type of the original column
+add column id_user int; #need to have the same type of the original column
 
 #The sign as a foreign key
 alter table payments
 add foreign key (id_user)
 references students(id);
 #If you don't put students(id) won't show error, but the key will be just normal (not foreign key)
+
+#Case when - need to use 'end' to show that you finished all cases/transformation
+select *,
+case
+	when aux_p = 1 or aux_s = 1 then 0
+    else 1
+end as aux_d #here I create a variable called 'aux_d' that can assume two values: 0 or 1
+from temp4;
